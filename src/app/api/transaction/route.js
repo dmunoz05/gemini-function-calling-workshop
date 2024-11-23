@@ -12,16 +12,18 @@ export async function POST(request) {
   const description = formData.get("description");
   const picture = formData.get("picture");
 
-  await createTransaction(description, picture);
-
-  return NextResponse.json({});
+  return createTransaction(description, picture);
 }
 
 async function createTransaction(description, picture) {
   try {
     const result = await extractData(description, picture);
 
-    console.log(result);
+    if (!result.date) {
+      result.date = new Date().toISOString();
+    }
+
+    return NextResponse.json({ transaction: result });
   } catch (error) {
     return new NextResponse(null, {
       status: 500,
