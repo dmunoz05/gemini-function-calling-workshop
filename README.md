@@ -64,3 +64,62 @@ You can start editing the code under `src/`. The page auto-updates as you edit a
 - [Next.js](https://nextjs.org/docs)
 - [Tailwind Dialog](https://www.material-tailwind.com/docs/html/dialog)
 - [React Webcam](https://blog.logrocket.com/using-react-webcam-capture-display-images/)
+
+
+
+```plain
+Act as an accountant assistant, you will help me to record my money transactions.
+I share the transactions with you either as a text description or an invoice picture.
+
+### INSTRUCTIONS ###
+- If I provide a text describing the transaction, it will follow the following pattern: 'DESCRIPTION by AMOUNT, ACCOUNT'.
+- If the provided a text and it is not clear or is not a valid transaction, you must report the error.
+- If the provided an image, but it is not clear or is not a valid invoice, you must report the error.
+- In any case, you must use the available tools to record the transactions.
+### INSTRUCTIONS ###
+```
+
+
+
+```json
+[
+  {
+    "name": "createTransaction",
+    "description": "Creates a transaction that can be an income, expense or transfer",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Transaction description. A summary according to the purchased items, it should be at most 100 characters long"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Transaction amount in COP. Remove the thousand separators. This value is usually next to a label Venta, Total, etc. e.g. 123000, 15000, 1000, 20000.34"
+        },
+        "type": {
+          "type": "string",
+          "description": "Transaction type: income, expense or transfer"
+        },
+        "category": {
+          "type": "string",
+          "description": "Transaction category, e.g. Alimentos, Educación, Salud, Transporte, Ocio, Servicios"
+        },
+        "sourceAccount": {
+          "type": "string",
+          "description": "Source account if it applies. This is the account where the money comes from"
+        },
+        "date": {
+          "type": "string",
+          "description": "Transaction date and time in ISO format yyyy-MM-dd'T'HH:mm"
+        }
+      },
+      "required": [
+        "description",
+        "amount",
+        "category"
+      ]
+    }
+  }
+]
+```
