@@ -1,7 +1,7 @@
-import createTransacction from '@/app/api/genia/tools/createTransaction.json'
+import createTransaction from "@/app/api/genia/tools/createTransaction.json";
 
 export const tools = [
   {
-    functionDeclarations: [createTransacction]
-  }
-]
+    functionDeclarations: [createTransaction],
+  },
+];
